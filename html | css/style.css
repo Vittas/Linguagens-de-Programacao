@@ -1,0 +1,18 @@
+body{
+    display: grid;
+    grid-template-rows: 100px 5rem auto 30%;
+}
+
+header{
+    background-color: aqua;
+}
+
+nav{
+    background-color: red;
+}
+
+main{
+    place-self: center;
+    background-color: blueviolet;
+    width: 20px;
+}

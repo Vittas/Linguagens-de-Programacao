@@ -1,0 +1,95 @@
+body{
+    margin: 0;
+    padding: 0;
+    /* grid-template-rows: 100px 5rem auto 30%; */
+
+}
+
+nav{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 4px 8px 5px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    font-size: 22px ;
+    font-weight: bold;
+
+    
+}
+
+h1{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+li{
+    list-style: none;
+    
+}
+
+#form_tarefa{
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 30px;
+    max-width: 25em;
+    box-shadow: 4px 8px 5px ;
+    visibility: hidden;
+    margin: 0 auto;
+    position: absolute;
+    
+}
+
+#lista_tarefas{
+    columns: 5;    
+}
+
+.all{
+    padding: 10px;
+    width: 100%;
+}
+
+
+.input_txt{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.confirm_button{
+    background-color: rgb(19, 160, 216);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0;
+    cursor: pointer;
+
+}
+
+.delete_button{
+    background-color: rgb(216, 19, 19);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0;
+    cursor: pointer;
+}
+
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100px;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}
