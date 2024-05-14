@@ -1,23 +1,13 @@
 equa =  input("Digite uma equação: ")
 
-num = 1
-num2= 2
+num = 0
+num2 = 0
 
 for i in equa:
-
+    equa = equa.replace("+", "")
+    # print(equa)
     sinais = i
-
-
-
-    # num =(num + num2)
-    # print(num)
-
-    
-    if sinais == "+" or sinais == "-":
-        num2 = i
-        num2 = num2.replace("+", "0") 
-        num2= int(num2)
-        print(num2)
-z
-    # num =  num + num2
- 
+    if sinais == "+":
+        for n in equa:
+            num2 = n
+            print(num2)
