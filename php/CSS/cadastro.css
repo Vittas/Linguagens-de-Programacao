@@ -1,0 +1,42 @@
+body{
+    display: grid;
+    grid-template-rows: 100px 5rem auto 30%;
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    font-size: 22px ;
+    font-weight: bold;
+    box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.15);
+}
+
+form{
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.15);
+    width: 30em;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#bt_enviar{
+    padding: 8px;
+    background-color: rgb(35, 115, 235);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+}
+
+#cadform{
+    text-align: right;
+    margin: 0 auto;
+    
+    width: 20em;
+    
+}

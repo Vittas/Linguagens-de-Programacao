@@ -1,0 +1,6 @@
+body{
+    display: grid;
+    grid-template-rows: 100px 5rem auto 30%;
+    margin: 0;
+    padding: 0;
+}
