@@ -1,0 +1,33 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 0 0 2em 0;
+  border-radius: 12px;
+  background-color: white;
+  border: 0;
+  color: black;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+#perfil-bg{
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 2em;
+  border: 0;
+}
+
+#ft-perfil{
+  border-radius: 100%;
+  width: 150px;
+  position: relative;
+  bottom: 120px;
+}

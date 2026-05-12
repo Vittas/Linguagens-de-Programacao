@@ -1,0 +1,22 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+nav{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.red{
+    background-color: red;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.blue{
+    background-color: blue;
+    padding: 8px;
+    border-radius: 5px;
+}

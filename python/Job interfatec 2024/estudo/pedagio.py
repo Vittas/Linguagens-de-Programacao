@@ -1,0 +1,6 @@
+entrada = input()
+l, d = list(map(int, entrada.split(" ")))
+entrada = input()
+k, p = list(map(int, entrada.split(" ")))
+custoTotal = int((k*l)+(round(l/d, 0)*p))
+print(custoTotal)

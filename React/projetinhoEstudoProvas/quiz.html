@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Sistemas Operacionais</title>
+    <link rel="icon" href="data:,"> <!-- Remove o erro do favicon -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#E5E7EB',
+                            200: '#D1D5DB',
+                            300: '#9CA3AF',
+                            400: '#6B7280',
+                            500: '#4B5563',
+                            600: '#374151',
+                            700: '#1F2937',
+                            800: '#111827',
+                            900: '#0F172A',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar-item {
+            @apply flex items-center p-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/30 cursor-pointer transition-colors;
+        }
+
+        .sidebar-item.active {
+            @apply bg-indigo-100 dark:bg-indigo-900/30 font-medium;
+        }
+
+        .option-item {
+            @apply flex items-center p-3 my-1 rounded-lg border border-gray-200 dark:border-dark-600 hover:border-indigo-300 dark:hover:border-indigo-500 cursor-pointer transition-colors;
+            display: flex;
+            /* Já está aplicado pelo Tailwind */
+            align-items: center;
+            /* Já está aplicado pelo Tailwind */
+        }
+
+        .option-item.selected .option-circle {
+            @apply bg-indigo-600 border-indigo-600 text-white;
+        }
+
+        .option-text {
+            @apply flex-1;
+            /* Faz o texto ocupar o espaço restante */
+        }
+
+        .option-item.correct {
+            @apply bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-500;
+        }
+
+        .option-item.incorrect {
+            @apply bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-500;
+        }
+
+        .theme-toggle {
+            @apply p-2 rounded-full hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-dark-800 dark:text-dark-100 min-h-screen">
+    <div class="flex flex-col md:flex-row h-full">
+        <!-- Sidebar -->
+        <div class="w-full md:w-64 bg-white dark:bg-dark-700 p-4 shadow-md md:h-screen md:sticky md:top-0">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center">
+                    <div
+                        class="bg-indigo-600 w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold mr-2">
+                        Q</div>
+                    <h1 class="text-xl font-bold">QuizOS</h1>
+                </div>
+                <button id="theme-toggle" class="theme-toggle">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path id="sun-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        <path id="moon-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                            style="display: none;" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mb-8 p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
+                <div class="text-sm text-gray-500 dark:text-dark-300 mb-1">Seu Progresso</div>
+                <div class="flex justify-between items-center">
+                    <div class="text-2xl font-bold" id="progress-display">0/2</div>
+                    <div class="w-12 h-2 bg-gray-200 dark:bg-dark-600 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" id="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="space-y-1">
+                <div class="sidebar-item active">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-indigo-600 dark:text-indigo-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Quiz
+                </div>
+                <div class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-500 dark:text-dark-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    Resumos
+                </div>
+                <div class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-500 dark:text-dark-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Desempenho
+                </div>
+                <div class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-500 dark:text-dark-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Configurações
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white dark:bg-dark-700 rounded-xl shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4">Quiz - Sistemas Operacionais</h2>
+                    <div class="flex items-center text-sm text-gray-500 dark:text-dark-400 mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Tempo estimado: 15 minutos
+                    </div>
+
+                    <div id="quiz-container" class="mb-6"></div>
+
+                    <div class="flex justify-between items-center">
+                        <button id="prev-btn"
+                            class="px-4 py-2 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-700 dark:text-dark-200 hover:bg-gray-50 dark:hover:bg-dark-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled>
+                            Anterior
+                        </button>
+                        <div class="text-sm text-gray-500 dark:text-dark-400" id="question-counter">1/2</div>
+                        <button id="next-btn"
+                            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Próxima
+                        </button>
+                    </div>
+                </div>
+
+                <div id="results-container" class="bg-white dark:bg-dark-700 rounded-xl shadow-sm p-6 hidden">
+                    <h2 class="text-xl font-bold mb-4">Seu Resultado</h2>
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="relative w-32 h-32">
+                            <svg class="w-full h-full" viewBox="0 0 36 36">
+                                <path d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E5E7EB" stroke-width="3" />
+                                <path d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4F46E5" stroke-width="3"
+                                    stroke-dasharray="0, 100" id="result-circle" />
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-2xl font-bold" id="score-display">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mb-6">
+                        <h3 class="text-lg font-medium mb-2" id="result-message"></h3>
+                        <p class="text-gray-600 dark:text-dark-400" id="result-details"></p>
+                    </div>
+                    <button id="restart-btn"
+                        class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                        Refazer Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const questionCounter = document.getElementById('question-counter');
+        const progressDisplay = document.getElementById('progress-display');
+        const progressBar = document.getElementById('progress-bar');
+        const scoreDisplay = document.getElementById('score-display');
+        const resultMessage = document.getElementById('result-message');
+        const resultDetails = document.getElementById('result-details');
+        const resultCircle = document.getElementById('result-circle');
+        const restartBtn = document.getElementById('restart-btn');
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Estado do quiz
+        let quizData = [];
+        let currentQuestion = 0;
+        let answers = [];
+        let score = 0;
+        let darkMode = false;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function () {
+            // Verificar preferência de tema
+            if (localStorage.getItem('darkMode') === 'true' ||
+                (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                enableDarkMode();
+            }
+
+            // Carregar dados do JSON
+            loadQuizData();
+        });
+
+        // Função para carregar os dados do quiz
+        async function loadQuizData() {
+            try {
+                const response = await fetch('perguntas.json');
+                if (!response.ok) {
+                    throw new Error('Falha ao carregar perguntas');
+                }
+                quizData = await response.json();
+                answers = Array(quizData.length).fill(null);
+
+                // Iniciar quiz após carregar os dados
+                buildQuiz();
+            } catch (error) {
+                console.error('Erro ao carregar perguntas:', error);
+                quizContainer.innerHTML = `
+                <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-700">
+                    <p class="text-red-600 dark:text-red-400">Erro ao carregar as perguntas. Por favor, recarregue a página.</p>
+                </div>
+            `;
+            }
+        }
+
+        // Configuração do tema
+        themeToggle.addEventListener('click', () => {
+            if (darkMode) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        function enableDarkMode() {
+            document.documentElement.classList.add('dark');
+            darkMode = true;
+            localStorage.setItem('darkMode', 'true');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+
+        function disableDarkMode() {
+            document.documentElement.classList.remove('dark');
+            darkMode = false;
+            localStorage.setItem('darkMode', 'false');
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+
+        // Construir o quiz
+        function buildQuiz() {
+            if (quizData.length === 0) return;
+            showQuestion();
+            updateProgress();
+        }
+
+        // Mostrar questão atual
+        function showQuestion() {
+            if (quizData.length === 0) return;
+
+            const question = quizData[currentQuestion];
+
+            // Atualizar contador
+            questionCounter.textContent = `${currentQuestion + 1}/${quizData.length}`;
+
+            // Configurar botões de navegação
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finalizar' : 'Próxima';
+
+            // Construir HTML das opções
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const optionLetter = option.charAt(0);
+                const isSelected = answers[currentQuestion] === optionLetter;
+                const isCorrect = optionLetter === question.answer;
+                const isAnswered = answers[currentQuestion] !== null;
+
+                let optionClass = 'option-item';
+                if (isSelected) optionClass += ' selected';
+                if (isAnswered && isCorrect) optionClass += ' correct';
+                if (isAnswered && isSelected && !isCorrect) optionClass += ' incorrect';
+
+                optionsHTML += `
+                <div class="${optionClass}" data-option="${optionLetter}">
+                    <div class="w-5 h-5 rounded-full border border-gray-300 dark:border-dark-400 mr-3 flex-shrink-0 flex items-center justify-center option-circle">
+                        ${isSelected ? '●' : (isAnswered && isCorrect ? '✓' : '')}
+                    </div>
+                    <div class="option-text">${option}</div>
+                </div>
+            `;
+            });
+
+            // Inserir no DOM
+            quizContainer.innerHTML = `
+            <div class="mb-6">
+                <h3 class="text-lg font-medium mb-4">${question.question}</h3>
+                <div class="options-container">${optionsHTML}</div>
+            </div>
+        `;
+
+            document.querySelectorAll('.option-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    // Impede resposta múltipla
+                    if (answers[currentQuestion] !== null) return;
+
+                    const selectedOption = item.getAttribute('data-option');
+                    const correctOption = quizData[currentQuestion].answer;
+
+                    answers[currentQuestion] = selectedOption;
+
+                    // Remove classes antigas e aplica feedback
+                    document.querySelectorAll('.option-item').forEach(opt => {
+                        const optLetter = opt.getAttribute('data-option');
+                        opt.classList.remove('selected', 'correct', 'incorrect');
+
+                        if (optLetter === correctOption) {
+                            opt.classList.add('correct');
+                            opt.querySelector('.option-circle').textContent = '✓';
+                        } else if (optLetter === selectedOption) {
+                            opt.classList.add('incorrect');
+                            opt.querySelector('.option-circle').textContent = '●';
+                        } else {
+                            opt.querySelector('.option-circle').textContent = '';
+                        }
+                    });
+
+                    // Marca a selecionada
+                    item.classList.add('selected');
+
+                    updateProgress();
+                });
+            });
+        }
+
+        // Atualizar progresso
+        function updateProgress() {
+            if (quizData.length === 0) return;
+
+            const answeredCount = answers.filter(a => a !== null).length;
+            progressDisplay.textContent = `${answeredCount}/${quizData.length}`;
+            progressBar.style.width = `${(answeredCount / quizData.length) * 100}%`;
+        }
+
+        // Mostrar resultados
+        function showResults() {
+            if (quizData.length === 0) return;
+
+            // Calcular pontuação
+            score = 0;
+            quizData.forEach((question, index) => {
+                if (answers[index] === question.answer) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / quizData.length) * 100);
+            scoreDisplay.textContent = `${percentage}%`;
+
+            // Animar círculo de progresso
+            const circumference = 2 * Math.PI * 15.9155;
+            const offset = circumference - (percentage / 100) * circumference;
+            resultCircle.style.strokeDashoffset = offset;
+            resultCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+
+            // Mensagem baseada no desempenho
+            if (percentage >= 80) {
+                resultMessage.textContent = "Excelente!";
+                resultMessage.className = "text-lg font-medium mb-2 text-green-600 dark:text-green-400";
+            } else if (percentage >= 50) {
+                resultMessage.textContent = "Bom trabalho!";
+                resultMessage.className = "text-lg font-medium mb-2 text-blue-600 dark:text-blue-400";
+            } else {
+                resultMessage.textContent = "Continue praticando!";
+                resultMessage.className = "text-lg font-medium mb-2 text-indigo-600 dark:text-indigo-400";
+            }
+
+            resultDetails.textContent = `Você acertou ${score} de ${quizData.length} questões.`;
+
+            // Mostrar resultados e esconder quiz
+            quizContainer.parentElement.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+        }
+
+        // Event listeners para navegação
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (quizData.length === 0) return;
+
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            currentQuestion = 0;
+            answers = Array(quizData.length).fill(null);
+            score = 0;
+
+            showQuestion();
+            updateProgress();
+
+            quizContainer.parentElement.classList.remove('hidden');
+            resultsContainer.classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

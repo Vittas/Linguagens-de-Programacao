@@ -1,0 +1,1 @@
+gcloud functions deploy animais   --entry-point=Animais  --runtime=go122  --trigger-http  --allow-unauthenticated  --gen2  --region=us-central1  --vpc-connector=projects/earnest-cosmos-175020/locations/us-central1/connectors/vpc-function

@@ -1,0 +1,119 @@
+// //usado para criar um Tipo 
+// interface Pessoa{ 
+//     nome: string,
+//     idade: number,
+//     profissao?: string
+// }
+
+
+// const pessoa: Pessoa = {
+//     nome: "Vitor",
+//     idade: 18
+// }
+
+// console.log(pessoa.nome)
+
+// const outraPessoa: Pessoa = {
+//     nome: "Felipe",
+//     idade: 18,
+//     profissao: "Pedreiro Digital"
+// }
+
+// console.log(outraPessoa)
+
+// const arrayPessoas: Pessoa[] = [pessoa, outraPessoa] // é um array do tipo Pessoa (String e Number)
+
+// const x:number = 15
+
+// if(x>15){
+//     console.log("maior que 15")
+// }
+// else if(x == 15){
+//     console.log("o numero é igual a 15")
+// }
+// else{
+//     console.log("menor que 15")
+// }
+
+// const typeUser = {
+//     admin: "voce é adm",
+//     student: "estudante",
+//     viewer: "só vizualiza"
+// }
+
+// function validateUser(user: string){
+//     console.log(typeUser[user as keyof typeof typeUser])
+
+
+// }
+
+// const user = "viewer"
+
+// validateUser(user)
+// let lista_pessoas : string[] = []
+// let nome : string = "vitor"
+
+// function listarPessoas(){
+//     lista_pessoas.push(nome)
+//     console.log(lista_pessoas)
+//     // return lista_pessoas
+// }
+// listarPessoas()
+// console.log(lista_pessoas)
+
+// let x :number = 5
+// for (let i : number = 0; i < 5; i +=2 ){
+//     console.log(i)
+// }
+
+// const array : number[] = [1,2,3,4,5,6,8,10,12]
+// let outraLista = []
+
+// array.map(num => {if(num%2 === 0){console.log(num)}})
+
+/////////////////////////// CLASSES /////////////////////////////////////
+
+class User{
+
+  
+    name: string = 'vitor'
+    age: number = 18
+
+    constructor(name:string, age:number){
+        this.name = name
+        this.age = age
+    }
+    showName = () => {
+        console.log(this.name)
+    }
+}   
+
+const user = new User("vitor", 18)
+const otherUser = new User('Yuri', 19)
+user.showName()
+otherUser.showName()
+
+// THIS == Ele acessa a propriedade indicada na classe | exemplo this.name | ele acessa a propriedade name que esteja na classe
+
+// HERANÇA E SUPER CONSTUTOR (PEGA OS ATRIBUTOS DA CLASSE MÃE)
+
+//class admin extends account{
+    
+//     constructor(name:string, accountNumber:number){
+//         super(name, accountNumber)
+//         this.balance=20
+//     }
+    
+// }
+
+//////////////////////// BOA PRATICA /////////////////////////
+
+CRIAR um documento para cada classe criada
+
+NA MAIORIA DAS VEZES os atributos são tipo privao
+
+Public =  permite mudar a qualquer momento e em qualquer lugar do codigo
+
+Private = permite mudar o atributo somente no local no qual ele foi criado
+
+Readonly = torna aquele atributo imutavel 

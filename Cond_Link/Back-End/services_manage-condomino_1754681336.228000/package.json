@@ -1,0 +1,16 @@
+{
+  "name": "manage-condomino-function",
+  "version": "1.0.0",
+  "description": "Google Cloud Function for managing condominos (CRUD)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mysql2": "^3.6.5",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,244 @@
+[
+  {
+    "question": "1. De acordo com a definição apresentada, o que é um impasse (deadlock)?",
+    "options": [
+      "a) Uma situação em que um processo termina sua execução e libera todos os seus recursos para outros processos.",
+      "b) Um conjunto de processos em que cada um aguarda por um evento que só pode ser causado por um processo fora desse conjunto.",
+      "c) Uma condição em que o sistema operacional reinicia automaticamente para resolver um conflito de recursos.",
+      "d) Um conjunto de processos em que todo processo no conjunto está esperando por um evento que somente outro processo desse mesmo conjunto poderá realizar.",
+      "e) Um erro de hardware que causa o travamento de um único processo, sem afetar o restante do sistema."
+    ],
+    "answer": "d"
+  },
+  {
+    "question": "2. Para que um deadlock ocorra, quatro condições devem estar presentes simultaneamente. Qual das alternativas abaixo NÃO representa uma dessas condições?",
+    "options": [
+      "a) Condição de Exclusão Mútua.",
+      "b) Condição de Posse e espera.",
+      "c) Condição de Preempção.",
+      "d) Condição de não Preempção.",
+      "e) Condição de Espera Circular."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "3. Qual estratégia para lidar com deadlocks é conhecida como 'Algoritmo do Avestruz'?",
+    "options": [
+      "a) Detecção e Recuperação, onde o sistema monitora ativamente a ocorrência de impasses.",
+      "b) Ignorar completamente o problema e, caso um impasse ocorra, simplesmente reiniciar o computador.",
+      "c) Prevenção, negando estruturalmente uma das quatro condições necessárias para o impasse.",
+      "d) Anulação dinâmica, realizando uma alocação cuidadosa de recursos para evitar o impasse.",
+      "e) Recuperação por meio de retrocesso, utilizando pontos de checagem para restaurar um estado anterior."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "4. Dentre as formas de recuperação de um deadlock, qual delas consiste em retirar um recurso de um processo para entregá-lo a outro?",
+    "options": [
+      "a) Recuperação por meio de eliminação de processos.",
+      "b) Recuperação por meio de retrocesso.",
+      "c) Recuperação por meio da negação da espera circular.",
+      "d) Recuperação por meio do Algoritmo do Banqueiro.",
+      "e) Recuperação por meio de preempção."
+    ],
+    "answer": "e"
+  },
+  {
+    "question": "5. Qual é a principal desvantagem da prevenção de deadlock atacando a condição de 'Posse e Espera', que exige que um processo requisite todos os seus recursos antes de iniciar a execução?",
+    "options": [
+      "a) Aumenta a complexidade do sistema operacional, pois requer a numeração de todos os recursos.",
+      "b) Muitos processos não sabem de antemão todos os recursos que precisarão durante sua execução.",
+      "c) Causa o aumento do tempo de espera, pois os processos precisam aguardar a liberação de todos os recursos, mesmo que precisem de apenas um para iniciar.",
+      "d) Viola a condição de exclusão mútua, permitindo que vários processos acessem o mesmo recurso simultaneamente.",
+      "e) É uma técnica que só funciona para recursos preemptíveis."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "1. Qual é a principal função do gerenciador de memória em um sistema operacional?",
+    "options": [
+      "a) Apenas controlar a velocidade de acesso à memória Cache.",
+      "b) Gerenciar a hierarquia de memórias, controlando a alocação, reutilização e segurança das posições de memória.",
+      "c) Executar a desfragmentação do disco rígido para otimizar o acesso aos arquivos.",
+      "d) Atribuir endereços IP para os processos que precisam de comunicação em rede.",
+      "e) Compilar o código-fonte dos programas para a linguagem de máquina."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "2. A utilização de um registrador-base e um registrador-limite é uma solução para quais problemas fundamentais do gerenciamento de memória em sistemas multiprogramados?",
+    "options": [
+      "a) Fragmentação interna e externa.",
+      "b) Apenas para a proteção de memória.",
+      "c) Latência da rede e velocidade do barramento.",
+      "d) Paginação e segmentação.",
+      "e) Proteção e realocação de memória para os processos."
+    ],
+    "answer": "e"
+  },
+  {
+    "question": "3. O que é o procedimento de 'swapping'?",
+    "options": [
+      "a) É a compactação de memória para eliminar espaços vazios entre processos.",
+      "b) Um mecanismo de segurança que impede que um processo acesse o espaço de endereçamento de outro.",
+      "c) A transferência de processos entre a memória principal (RAM) e a memória secundária (disco) para gerenciar a falta de espaço.",
+      "d) O processo de conversão de endereços virtuais em endereços físicos pela MMU.",
+      "e) A criação de uma pilha para armazenamento de variáveis locais e endereços de retorno de funções."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "4. Na ausência de abstração de memória, qual era uma das principais limitações dos primeiros sistemas computacionais?",
+    "options": [
+      "a) A impossibilidade de usar memórias do tipo ROM ou EPROM.",
+      "b) A necessidade de compilação dinâmica de todas as variáveis.",
+      "c) A dificuldade em executar dois programas ao mesmo tempo, pois cada programa assumia o controle total da memória.",
+      "d) A alta taxa de fragmentação da memória, que exigia compactação constante.",
+      "e) A obrigatoriedade do uso de registradores-base e limite, o que tornava o hardware mais caro."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "1. Qual das seguintes opções descreve corretamente o funcionamento de um mapa de bits para gerenciamento de memória livre?",
+    "options": [
+      "a) Uma lista encadeada onde cada nó representa um segmento livre de memória.",
+      "b) A memória é dividida em unidades de alocação, e para cada unidade corresponde um bit (0 para livre, 1 para ocupada).",
+      "c) Um algoritmo que sempre aloca o maior bloco de memória livre disponível (Worst-fit).",
+      "d) Uma estrutura de árvore que organiza os blocos de memória de forma hierárquica.",
+      "e) Um registrador especial na CPU que aponta para o próximo bloco de memória livre."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "2. Qual é a principal desvantagem do uso de mapa de bits?",
+    "options": [
+      "a) O tamanho do mapa de bits é excessivamente grande, independentemente do tamanho da unidade de alocação.",
+      "b) É muito rápido para encontrar um espaço livre, mas muito lento para alocá-lo.",
+      "c) A necessidade de encontrar uma sequência de k bits 0 para alocar k unidades de memória é um processo lento.",
+      "d) Não permite a liberação de memória uma vez que ela foi alocada.",
+      "e) Gera um alto grau de fragmentação externa em comparação com as listas ligadas."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "3. Qual algoritmo de alocação de memória livre escaneia a lista de blocos livres e aloca o primeiro segmento que seja grande o suficiente para o processo?",
+    "options": [
+      "a) Best-fit.",
+      "b) Worst-fit.",
+      "c) Next-fit.",
+      "d) First-fit.",
+      "e) Buddy System."
+    ],
+    "answer": "d"
+  },
+  {
+    "question": "4. Comparando os algoritmos First-fit e Best-fit, qual é uma característica do Best-fit?",
+    "options": [
+      "a) É mais rápido, pois sempre encontra o primeiro bloco que serve.",
+      "b) Tende a deixar segmentos de memória livres muito pequenos, que podem ser inúteis.",
+      "c) Busca sempre pelo maior segmento de memória disponível.",
+      "d) Continua a busca a partir do último ponto onde encontrou um segmento.",
+      "e) Na média, gera fragmentos maiores e mais úteis que o First-fit."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "1. Qual é o principal objetivo da Memória Virtual?",
+    "options": [
+      "a) Aumentar a capacidade da memória cache para acelerar o processador.",
+      "b) Permitir que cada programa tenha seu próprio espaço de endereçamento, que pode ser maior que a memória física disponível, mapeando-o na memória física conforme a necessidade.",
+      "c) Substituir completamente o uso de memória RAM por memória secundária (HD/SSD).",
+      "d) Unificar o espaço de endereçamento de todos os processos para facilitar o compartilhamento de dados.",
+      "e) Eliminar a necessidade de um sistema de arquivos, armazenando tudo na memória RAM."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "2. O que é uma 'falta de página' (page fault)?",
+    "options": [
+      "a) Um erro de hardware na MMU que corrompe a tabela de páginas.",
+      "b) Quando o programa tenta acessar uma parte de seu espaço de endereçamento que não está atualmente mapeada na memória física.",
+      "c) Uma tentativa de violação de proteção, como escrever em uma página somente de leitura.",
+      "d) Quando a TLB não consegue encontrar uma correspondência para o endereço virtual.",
+      "e) O esgotamento completo da memória de troca (swap) no disco."
+    ],
+    "answer": "b"
+  },
+  {
+    "question": "3. Qual é a função da TLB (Translation Lookaside Buffer)?",
+    "options": [
+      "a) Armazenar todos os processos que estão na fila de espera para serem executados.",
+      "b) Servir como um backup da memória RAM no disco rígido.",
+      "c) É um dispositivo de hardware (memória associativa) que acelera a tradução de endereços virtuais para físicos, armazenando os mapeamentos mais recentes.",
+      "d) Gerenciar as operações de entrada e saída para os dispositivos de bloco.",
+      "e) Decidir qual página deve ser removida da memória quando ocorre uma falta de página."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "4. O algoritmo de substituição de página 'Não Usada Recentemente' (NRU) classifica as páginas em quatro classes com base em dois bits. Quais são esses bits?",
+    "options": [
+      "a) Bit de Início (I) e Bit de Fim (F).",
+      "b) Bit de Leitura (L) e Bit de Escrita (E).",
+      "c) Bit de Prioridade (P) e Bit de Alocação (A).",
+      "d) Bit de Segurança (S) e Bit de Verificação (V).",
+      "e) Bit de Referência (R) e Bit de Modificação (M)."
+    ],
+    "answer": "e"
+  },
+  {
+    "question": "5. Qual é o problema conhecido como 'ultrapaginação' (thrashing)?",
+    "options": [
+      "a) Uma condição que ocorre quando a memória está com tantos espaços livres que o sistema operacional não consegue decidir onde alocar um novo processo.",
+      "b) Quando um processo acessa páginas sequencialmente, melhorando a localidade de referência.",
+      "c) Quando a memória é pequena e o sistema gasta a maior parte do tempo trocando páginas entre a RAM e o disco, resultando em faltas de página constantes e baixo desempenho.",
+      "d) O processo de pré-carregar todas as páginas de um processo antes de ele começar a executar.",
+      "e) Um erro no algoritmo do relógio que o faz girar indefinidamente sem encontrar uma página para substituir."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "1. Qual das alternativas abaixo NÃO é um requisito essencial para o armazenamento de informações a longo prazo, gerenciado por um sistema de arquivos?",
+    "options": [
+      "a) A informação deve sobreviver ao término do processo que a utiliza.",
+      "b) Múltiplos processos devem ser capazes de acessar a informação concorrentemente.",
+      "c) A informação deve ser armazenada exclusivamente na memória principal (RAM) para acesso rápido.",
+      "d) Deve ser possível armazenar uma quantidade muito grande de informação.",
+      "e) As informações armazenadas em arquivos devem ser persistentes."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "2. Nos sistemas de arquivos, o que são diretórios?",
+    "options": [
+      "a) Arquivos regulares que contêm exclusivamente informações do usuário.",
+      "b) Arquivos especiais utilizados para modelar dispositivos de E/S de caracteres, como teclados.",
+      "c) Arquivos especiais que possuem a estrutura do sistema de arquivos, contendo referências para outros arquivos ou diretórios.",
+      "d) Unidades lógicas de informação que são sempre armazenadas como uma sequência de bytes, sem estrutura.",
+      "e) Abstrações de dispositivos de armazenamento em bloco, como discos rígidos."
+    ],
+    "answer": "c"
+  },
+  {
+    "question": "3. O que é um 'nome de caminho absoluto'?",
+    "options": [
+      "a) Um nome de caminho que começa a partir do diretório de trabalho atual.",
+      "b) O nome do arquivo sem incluir sua extensão.",
+      "c) Um caminho que utiliza atalhos ou links simbólicos para chegar ao arquivo.",
+      "d) É o caminho formado desde o diretório-raiz até o arquivo desejado.",
+      "e) Um nome de arquivo que não diferencia letras maiúsculas de minúsculas."
+    ],
+    "answer": "d"
+  },
+  {
+    "question": "4. Qual dos itens abaixo representa uma estrutura de arquivo em que os dados são organizados como uma sequência de itens de tamanho fixo ou variável?",
+    "options": [
+      "a) Árvore.",
+      "b) Sequência de bytes.",
+      "c) Arquivo especial de caractere.",
+      "d) Diretório.",
+      "e) Sequência de registros."
+    ],
+    "answer": "e"
+  }
+]

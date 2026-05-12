@@ -1,0 +1,81 @@
+# ControlView Management
+by Icaro Soave
+
+## Login GCloud
+gcloud auth login
+
+## Configure o projeto atual do gcloud para o projeto que contém sua função. Use o comando:
+gcloud config set project earnest-cosmos-175020
+
+## Listar projetos
+gcloud projects list
+
+## Deploy
+gcloud functions deploy admin-management-unit \
+--entry-point BootUp \
+--runtime go123 \
+--trigger-http \
+--allow-unauthenticated \
+--gen2 \
+--region=us-central1 \
+--vpc-connector projects/earnest-cosmos-175020/locations/us-central1/connectors/vpc-function
+
+## Run mode dev
+- go build
+- ./test-controlid-resynchronize
+
+## Database
+```
+CREATE TABLE control_view (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(255),
+	partner VARCHAR(255),
+	url_manufacturer TEXT,
+	url_partner TEXT,
+	videos_loaded BOOLEAN,
+	manufacturer VARCHAR(255),
+	control_acess INT,
+	last_date_online DATETIME
+);
+
+CREATE TABLE video (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  url TEXT NOT NULL UNIQUE,
+  title VARCHAR(255),
+  description TEXT
+);
+
+CREATE TABLE control_view_video (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  control_view_id INT NOT NULL,
+  video_id INT NOT NULL,
+  uploaded INT NOT NULL DEFAULT 0 CHECK (uploaded IN (0, 1)),
+  FOREIGN KEY (control_view_id) REFERENCES control_view(id) ON DELETE CASCADE,
+  FOREIGN KEY (video_id) REFERENCES video(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE campaign (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE campaign_group (
+  campaign_id INT NOT NULL,
+  control_view_id INT NOT NULL,
+  PRIMARY KEY (campaign_id, control_view_id),
+  FOREIGN KEY (campaign_id) REFERENCES campaign(id) ON DELETE CASCADE,
+  FOREIGN KEY (control_view_id) REFERENCES control_view(id) ON DELETE CASCADE
+);
+
+CREATE TABLE campaign_video (
+  campaign_id INT NOT NULL,
+  video_id INT NOT NULL,
+  PRIMARY KEY (campaign_id, video_id),
+  FOREIGN KEY (campaign_id) REFERENCES campaign(id) ON DELETE CASCADE,
+  FOREIGN KEY (video_id) REFERENCES video(id) ON DELETE CASCADE
+);
+
+
+```
